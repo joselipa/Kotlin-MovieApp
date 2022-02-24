@@ -23,5 +23,6 @@ fun MovieDto.toCoin():Movie{
         id=id,
         poster_path= "https://image.tmdb.org/t/p/w500/$poster_path",
         title= title,
+        overview = overview
     )
 }

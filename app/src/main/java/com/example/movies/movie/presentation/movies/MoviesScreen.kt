@@ -13,12 +13,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.example.movies.movie.presentation.ui.Screen
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MoviesScreen(
-    viewModel: MoviesViewModel = hiltViewModel()
+    viewModel: MoviesViewModel = hiltViewModel(),
+    navController: NavController
 ){
     val state = viewModel.state.value
 
@@ -43,9 +46,10 @@ fun MoviesScreen(
             content = {
                 items(state.movies) { movie ->
                     CardMovie(
-                        mageMovie
-                            = movie.poster_path,
-                        title = movie.title
+                        movie = movie,
+                        onItemClick = {
+                            navController.navigate(Screen.MovieDetailScreen.route+"/${movie.id}")
+                        }
                     )
                 }
             }

@@ -5,4 +5,5 @@ object Constants {
     const val PAGE = "1"
     const val LANGUAGE = "en-US"
     const val BASE_URL = "https://api.themoviedb.org/"
+    const val MOVIE_ID = "movieId"
 }

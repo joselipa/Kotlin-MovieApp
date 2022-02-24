@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,11 +17,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
+import com.example.movies.movie.domain.model.Movie
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CardMovie(
-    mageMovie: String,
-    title: String
+    movie: Movie,
+    onItemClick: (Movie)->Unit
 ){
 
     Card(
@@ -28,10 +31,11 @@ fun CardMovie(
             .padding(4.dp)
             .fillMaxWidth(),
         elevation = 8.dp,
+        onClick = { onItemClick(movie) }
     ) {
         Box(modifier = Modifier.height(200.dp)){
             Image(
-                painter = rememberImagePainter(mageMovie),
+                painter = rememberImagePainter(movie.poster_path),
                 contentDescription = null,
                 contentScale = ContentScale.Crop
             )
@@ -53,7 +57,7 @@ fun CardMovie(
                 contentAlignment = Alignment.BottomCenter
             ){
                 Text(
-                    text = title,
+                    text = movie.title,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Start,
                     fontSize = 16.sp,
